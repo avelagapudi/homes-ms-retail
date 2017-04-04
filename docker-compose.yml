@@ -1,0 +1,30 @@
+
+version: '2'
+
+networks:
+  private:
+    driver: bridge
+
+services:
+  retail:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: mvn spring-boot:run -Dspring.profiles.active=dev,docker-mysql
+    ports:
+      - "9101:9101"
+    depends_on:
+      - db
+    networks:
+          - private
+    volumes:
+      - .:/code
+  db:
+    image: registry.prod.auction.local:5000/percona-server
+    ports:
+      - "11010:3306"
+    networks:
+          - private
+    environment:
+      MYSQL_DATABASE: 'sspms'
+      MYSQL_ROOT_PASSWORD: 'tenxdev'
