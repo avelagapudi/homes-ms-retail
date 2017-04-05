@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.Column;
 
 /**
  * Created by anupamav on 3/21/17.
@@ -14,10 +15,15 @@ import javax.persistence.Id;
 public class StockEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "stock_id")
     private Long stockId;
 
+    @Column(name = "product_id")
     private Long productId;
+
+    @Column(name = "store_id")
     private Long storeId;
+
     private Integer count;
 
     public Long getStockId() {

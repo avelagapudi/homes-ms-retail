@@ -2,7 +2,6 @@ package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigDecimal;
 
 /**
  * Created by anupamav on 4/3/17.
