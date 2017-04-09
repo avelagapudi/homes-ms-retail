@@ -17,33 +17,25 @@ public class StoreService {
     @Autowired
     private StoreRepository storeRepository;
 
-    public ResourceCreated<Long> addStore(StoreDTO store) {
+    public StoreDTO addStore(StoreDTO store) {
         StoreEntity storeEntity = new StoreEntity();
 
         storeEntity.setStoreId(store.getStoreId());
         storeEntity.setStoreName(store.getStoreName());
 
         storeEntity = storeRepository.save(storeEntity);
-
-        return new ResourceCreated<>(storeEntity.getStoreId());
-        //return convertToDTO(storeEntity);
+        //return new ResourceCreated<>(storeEntity.getStoreId());
+        return convertToDTO(storeEntity);
 
     }
 
     public List<StoreDTO> getAllStores() {
         List<StoreEntity> stores = storeRepository.findAll();
-        //return convertToDTOs(stores);
 
         return stores.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
-
-//    private List<StoreDTO> convertToDTOs(List<StoreEntity> models) {
-//        return models.stream()
-//                .map(this::convertToDTO)
-//                .collect(Collectors.toList());
-//    }
 
     public StoreDTO getStoreById(Long storeId) {
         StoreEntity result = storeRepository.findByStoreId(storeId);
@@ -55,7 +47,12 @@ public class StoreService {
         return convertToDTO(result);
     }
 
+
     public StoreDTO convertToDTO(StoreEntity storeEntity) {
+        if (storeEntity == null ) {
+            return null;
+        }
+
         StoreDTO dto = new StoreDTO();
 
         dto.setStoreId(storeEntity.getStoreId());

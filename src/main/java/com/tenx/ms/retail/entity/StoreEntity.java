@@ -17,6 +17,15 @@ public class StoreEntity {
     @Column(name = "store_name")
     private String storeName;
 
+    public StoreEntity() {
+
+    }
+
+    public StoreEntity(Long storeId, String storeName) {
+        this.storeId = storeId;
+        this.storeName =storeName;
+    }
+
     public Long getStoreId() {
         return storeId;
     }

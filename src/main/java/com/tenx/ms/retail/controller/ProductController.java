@@ -58,13 +58,13 @@ public class ProductController {
         return productService.getProductsByStore(storeId);
     }
 
-    @ApiOperation(value = "Get product information by store id and product id")
+    @ApiOperation(value = "Get product information by store id and product d")
     @RequestMapping(value= "/{storeId:\\d+}/{productId:\\d+}", method = RequestMethod.GET)
     public ProductDTO getProductByStoreIdProductId(@PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId){
         return productService.getProductByStoreIdProductId(storeId, productId);
     }
 
-    @ApiOperation(value = "Get product information by store id and product name")
+    @ApiOperation(value = "Get product information by store Id and product name for a store Id")
     @RequestMapping(value = "/{storeId:\\d+}/{productName:[a-zA-Z]+}", method = RequestMethod.GET)
     public ProductDTO getProductByStoreIdProductName(@PathVariable("storeId") Long storeId, @PathVariable("productName") String productName){
         return productService.getProductByStoreIdProductName(storeId, productName);
