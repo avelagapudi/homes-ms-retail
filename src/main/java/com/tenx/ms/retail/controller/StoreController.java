@@ -91,7 +91,6 @@ public class StoreController {
     @RequestMapping(value = "/{name:[a-zA-Z]+}", method = RequestMethod.GET)
     public ResponseEntity<StoreDTO> getStoreByName(@PathVariable("name") String name) {
 
-
         StoreDTO store = storeService.getStoreByName(name);
 
         if(store == null) {

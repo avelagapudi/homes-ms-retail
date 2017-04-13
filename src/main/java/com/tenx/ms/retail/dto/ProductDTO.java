@@ -19,6 +19,25 @@ public class ProductDTO {
     private String sku;
     private Double price;
 
+    public ProductDTO(){}
+
+//    public ProductDTO(Long productId, Long storeId, String name, String description, String sku, Double price){
+//        this.productId = productId;
+//        this.storeId = storeId;
+//        this.name = name;
+//        this.description = description;
+//        this.sku = sku;
+//        this.price = price;
+//    }
+
+    public ProductDTO(Long storeId, String name, String description, String sku, Double price) {
+        this.storeId = storeId;
+        this.name = name;
+        this.description = description;
+        this.sku = sku;
+        this.price = price;
+    }
+
     public Long getProductId() {
         return productId;
     }

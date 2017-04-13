@@ -16,7 +16,7 @@ public class StockService {
     @Autowired
     private StockRepository stockRepository;
 
-    public ResourceCreated<Long> updateStock(StockDTO stock){
+    public StockDTO updateStock(StockDTO stock){
         StockEntity stockEntity = new StockEntity();
 
         Long storeId = stock.getStoreId();
@@ -38,9 +38,19 @@ public class StockService {
 
         stockEntity = stockRepository.save(stockEntity);
 
-        return new ResourceCreated<>(stockEntity.getStockId());
+        //return new ResourceCreated<>(stockEntity.getStockId());
+        return convertToDTO(stockEntity);
 
+    }
 
+    public StockDTO convertToDTO(StockEntity stockEntity) {
+        StockDTO dto = new StockDTO();
+
+        dto.setStockId(stockEntity.getStockId());
+        dto.setStoreId(stockEntity.getStoreId());
+        dto.setProductId(stockEntity.getProductId());
+
+        return dto;
     }
 
 }

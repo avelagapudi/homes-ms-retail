@@ -18,7 +18,6 @@ import com.tenx.ms.retail.dto.StoreDTO;
 import static org.mockito.Mockito.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Arrays;
 
@@ -27,16 +26,11 @@ public class storeControllerTest {
 
     private MockMvc mockMvc;
 
-    @InjectMocks
-    private StoreController storeController;
+  @InjectMocks
+   private StoreController storeController;
 
-    @Mock
-    private StoreService storeService;
-
-    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(),
-            Charset.forName("utf8")
-    );
+   @Mock
+   private StoreService storeService;
 
     @Before
     public void setUp() {
@@ -48,11 +42,10 @@ public class storeControllerTest {
     public void addStore() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
 
-        StoreDTO store = new StoreDTO("test8Store");
+        StoreDTO store = new StoreDTO("test7Store");
 
         doReturn(store).when(storeService).addStore(store);
         mockMvc.perform(post("/v1/stores")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(mapper.writeValueAsString(store)))
                 .andExpect(status().isCreated());
@@ -68,7 +61,7 @@ public class storeControllerTest {
         when(storeService.getAllStores()).thenReturn(stores);
         mockMvc.perform(get("/v1/stores"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 
     }
 
@@ -100,7 +93,7 @@ public class storeControllerTest {
     }
 
     @Test
-    public void invalidAddStoreRequest() throws Exception{
+    public void addStore_conflict() throws Exception{
 
         ObjectMapper mapper = new ObjectMapper();
 

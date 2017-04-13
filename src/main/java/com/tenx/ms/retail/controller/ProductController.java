@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.tenx.ms.retail.dto.ProductDTO;
@@ -34,40 +36,56 @@ public class ProductController {
             @ApiResponse(code=500, message="Internal Server Error")
     })
     @RequestMapping(value = "/{storeId:\\d+}", method = RequestMethod.POST)
-    public ResourceCreated<Long> addProduct(@PathVariable("storeId") Long storeId, @Validated @RequestBody ProductDTO product) {
+    public ResponseEntity<?> addProduct(@PathVariable("storeId") Long storeId, @Validated @RequestBody ProductDTO product) {
 
         //check if store id exists
-        try {
-            StoreDTO store = storeService.getStoreById(storeId);
-
-        } catch (Exception e){
-
-            //TODO: throw exception if store does not exist
+        StoreDTO store = storeService.getStoreById(storeId);
+        if (store == null) {
+            return new ResponseEntity<String>("Store does not exist", HttpStatus.NOT_FOUND);
         }
 
         //Add storeId to product DTO
         product.setStoreId(storeId);
 
         //Add product under store
-        return productService.addProduct(product);
+        ProductDTO addedProduct = productService.addProduct(product);
+        return new ResponseEntity<ProductDTO>(addedProduct, HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get all products for a store ")
     @RequestMapping(value = "/{storeId:\\d+}", method = RequestMethod.GET)
-    public List<ProductDTO> getProductsByStore(@PathVariable("storeId") Long storeId){
-        return productService.getProductsByStore(storeId);
+    public ResponseEntity<List<ProductDTO>> getProductsByStore(@PathVariable("storeId") Long storeId){
+        List<ProductDTO> products = productService.getProductsByStore(storeId);
+
+        if(products == null || products.isEmpty()) {
+            return new ResponseEntity<List<ProductDTO>>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<List<ProductDTO>>(products, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get product information by store id and product d")
     @RequestMapping(value= "/{storeId:\\d+}/{productId:\\d+}", method = RequestMethod.GET)
-    public ProductDTO getProductByStoreIdProductId(@PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId){
-        return productService.getProductByStoreIdProductId(storeId, productId);
+    public ResponseEntity<ProductDTO> getProductByStoreIdProductId(@PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId){
+        ProductDTO product = productService.getProductByStoreIdProductId(storeId, productId);
+
+        if(product == null) {
+            return new ResponseEntity<ProductDTO>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<ProductDTO>(product, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get product information by store Id and product name for a store Id")
     @RequestMapping(value = "/{storeId:\\d+}/{productName:[a-zA-Z]+}", method = RequestMethod.GET)
-    public ProductDTO getProductByStoreIdProductName(@PathVariable("storeId") Long storeId, @PathVariable("productName") String productName){
-        return productService.getProductByStoreIdProductName(storeId, productName);
+    public ResponseEntity<ProductDTO> getProductByStoreIdProductName(@PathVariable("storeId") Long storeId, @PathVariable("productName") String productName){
+        ProductDTO product = productService.getProductByStoreIdProductName(storeId, productName);
+
+        if(product == null) {
+            return new ResponseEntity<ProductDTO>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<ProductDTO>(product, HttpStatus.OK);
     }
 
 }

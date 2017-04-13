@@ -1,5 +1,6 @@
 package com.tenx.ms.retail.controller;
 
+import com.tenx.ms.retail.service.ProductService;
 import com.tenx.ms.retail.service.StockService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.tenx.ms.retail.dto.StockDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import com.tenx.ms.commons.rest.dto.ResourceCreated;
+import com.tenx.ms.retail.dto.ProductDTO;
 
 /**
  * Created by anupamav on 3/21/17.
@@ -22,14 +24,26 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
+    @Autowired
+    private ProductService productService;
+
     @ApiOperation(value = "Update stock for store and product")
     @RequestMapping(value = "/{storeId:\\d+}/{productId:\\d+}", method = RequestMethod.PUT)
-    public ResponseEntity updateStock(@PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId, @Validated @RequestBody StockDTO stock){
+    public ResponseEntity<?> updateStock(@PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId, @Validated @RequestBody StockDTO stock){
+        //Check if the product and store record exists
+
+        ProductDTO product = productService.getProductByStoreIdProductId(storeId, productId);
+        if (product == null) {
+            return new ResponseEntity<String>("Product and Store match not found", HttpStatus.NOT_FOUND);
+        }
+
         stock.setStoreId(storeId);
         stock.setProductId(productId);
 
-        ResourceCreated<Long> stockId = stockService.updateStock(stock);
 
-        return new ResponseEntity(HttpStatus.OK);
+        //Add stock for a product under store
+        StockDTO updatedStock = stockService.updateStock(stock);
+
+        return new ResponseEntity<StockDTO>(updatedStock, HttpStatus.CREATED);
     }
 }
