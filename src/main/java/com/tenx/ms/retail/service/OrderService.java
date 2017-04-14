@@ -1,7 +1,8 @@
 package com.tenx.ms.retail.service;
 
-/**
- * Created by anupamav on 3/21/17.
- */
+import org.springframework.stereotype.Service;
+
+@Service
 public class OrderService {
+
 }

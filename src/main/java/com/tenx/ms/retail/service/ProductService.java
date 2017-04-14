@@ -10,9 +10,6 @@ import com.tenx.ms.retail.entity.ProductEntity;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Service
 public class ProductService {
     @Autowired

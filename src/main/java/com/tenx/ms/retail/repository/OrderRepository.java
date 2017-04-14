@@ -1,7 +1,8 @@
 package com.tenx.ms.retail.repository;
 
-/**
- * Created by anupamav on 3/21/17.
- */
-public class OrderRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.tenx.ms.retail.entity.OrderEntity;
+
+public interface OrderRepository extends JpaRepository<OrderEntity, Long>{
+
 }

@@ -2,10 +2,6 @@ package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-/**
- * Created by anupamav on 4/3/17.
- */
 public class ProductDTO {
 
     @JsonProperty(value="product_id")
@@ -21,14 +17,14 @@ public class ProductDTO {
 
     public ProductDTO(){}
 
-//    public ProductDTO(Long productId, Long storeId, String name, String description, String sku, Double price){
-//        this.productId = productId;
-//        this.storeId = storeId;
-//        this.name = name;
-//        this.description = description;
-//        this.sku = sku;
-//        this.price = price;
-//    }
+    public ProductDTO(Long productId, Long storeId, String name, String description, String sku, Double price){
+        this.productId = productId;
+        this.storeId = storeId;
+        this.name = name;
+        this.description = description;
+        this.sku = sku;
+        this.price = price;
+    }
 
     public ProductDTO(Long storeId, String name, String description, String sku, Double price) {
         this.storeId = storeId;

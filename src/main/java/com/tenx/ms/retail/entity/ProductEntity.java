@@ -7,9 +7,6 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Entity
 @Table(name = "products")
 public class ProductEntity {

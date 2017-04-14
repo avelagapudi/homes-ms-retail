@@ -10,7 +10,6 @@ import io.swagger.annotations.Api;
 import com.tenx.ms.retail.dto.StockDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import com.tenx.ms.commons.rest.dto.ResourceCreated;
 import com.tenx.ms.retail.dto.ProductDTO;
 
 /**
@@ -28,7 +27,7 @@ public class StockController {
     private ProductService productService;
 
     @ApiOperation(value = "Update stock for store and product")
-    @RequestMapping(value = "/{storeId:\\d+}/{productId:\\d+}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{storeId:\\d+}/{productId:\\d+}", method = RequestMethod.POST)
     public ResponseEntity<?> updateStock(@PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId, @Validated @RequestBody StockDTO stock){
         //Check if the product and store record exists
 
@@ -39,7 +38,6 @@ public class StockController {
 
         stock.setStoreId(storeId);
         stock.setProductId(productId);
-
 
         //Add stock for a product under store
         StockDTO updatedStock = stockService.updateStock(stock);

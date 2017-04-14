@@ -20,6 +20,25 @@ public class StockDTO {
     @JsonProperty(value="count")
     private Integer count;
 
+    public StockDTO(){}
+
+    public StockDTO(Integer count) {
+        this.count = count;
+    }
+
+    public StockDTO (Long stockId, Long storeId, Long productId, Integer count) {
+        this.stockId = stockId;
+        this.storeId = storeId;
+        this.productId = productId;
+        this.count = count;
+    }
+
+    public StockDTO (Long storeId, Long productId, Integer count) {
+        this.storeId = storeId;
+        this.productId = productId;
+        this.count = count;
+    }
+
     public Long getStockId() {
         return stockId;
     }
