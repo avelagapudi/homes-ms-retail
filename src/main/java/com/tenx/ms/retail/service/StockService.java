@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.tenx.ms.retail.dto.StockDTO;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Service
 public class StockService {
 
@@ -51,6 +48,18 @@ public class StockService {
         dto.setProductId(stockEntity.getProductId());
 
         return dto;
+    }
+
+    public boolean isStockAvailable(StockDTO stock) {
+        StockEntity result = stockRepository.findByStoreIdAndProductId(stock.getStoreId(), stock.getProductId());
+
+        Integer stockCount = result.getCount();
+
+        if(stockCount >= stock.getCount()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

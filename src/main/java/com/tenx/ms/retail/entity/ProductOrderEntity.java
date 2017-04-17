@@ -2,19 +2,22 @@ package com.tenx.ms.retail.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Entity
 @Table(name = "product_order")
 public class ProductOrderEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="product_order_id")
     private Long productOrderId;
 
-    private Long orderId;
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name="order_id")
+    private OrderEntity order;
+
+    @Column(name="product_id")
     private Long productId;
+
+    private Integer count;
 
     public Long getProductOrderId() {
         return productOrderId;
@@ -24,20 +27,12 @@ public class ProductOrderEntity {
         this.productOrderId = productOrderId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public OrderEntity getOrder() {
+        return order;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
+    public void setOrder(OrderEntity order) {
+        this.order = order;
     }
 
     public Long getProductId() {
@@ -46,5 +41,13 @@ public class ProductOrderEntity {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

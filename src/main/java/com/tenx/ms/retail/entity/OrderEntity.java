@@ -1,28 +1,36 @@
 package com.tenx.ms.retail.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Entity
 @Table(name = "orders")
 public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="order_id")
     private Long orderId;
 
+    @Column(name="store_id")
+    private Long storeId;
+
+    @Column(name="order_date")
     private Date orderDate;
+
+    @Column(name="first_name")
     private String firstName;
+
+    @Column(name="last_name")
     private String lastName;
+
     private String email;
     private String phone;
+    private Integer status;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private Set<ProductOrderEntity> products;
 
     public Long getOrderId() {
         return orderId;
@@ -70,5 +78,29 @@ public class OrderEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Set<ProductOrderEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductOrderEntity> products) {
+        this.products = products;
     }
 }

@@ -26,11 +26,11 @@ public class storeControllerTest {
 
     private MockMvc mockMvc;
 
-  @InjectMocks
-   private StoreController storeController;
+    @InjectMocks
+    private StoreController storeController;
 
-   @Mock
-   private StoreService storeService;
+    @Mock
+    private StoreService storeService;
 
     @Before
     public void setUp() {

@@ -2,17 +2,18 @@ package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
+import java.util.Set;
 
 public class OrderDTO {
 
     @JsonProperty(value="store_id")
     private Long storeId;
 
-    @JsonProperty(value="product_id")
-    private Long productId;
-
     @JsonProperty(value="order_date")
     private Date orderDate;
+
+    @JsonProperty(value="products")
+    private Set<ProductOrderDTO> products;
 
     @JsonProperty(value="first_name")
     private String firstName;
@@ -22,7 +23,7 @@ public class OrderDTO {
 
     private String email;
     private String phone;
-    private String status;
+    private Integer status;
 
     public Long getStoreId() {
         return storeId;
@@ -32,20 +33,20 @@ public class OrderDTO {
         this.storeId = storeId;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
     public Date getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public Set<ProductOrderDTO> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductOrderDTO> products) {
+        this.products = products;
     }
 
     public String getFirstName() {
@@ -80,11 +81,11 @@ public class OrderDTO {
         this.phone = phone;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }
