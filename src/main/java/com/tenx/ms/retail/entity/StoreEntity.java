@@ -2,9 +2,6 @@ package com.tenx.ms.retail.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Entity
 @Table(name = "stores")
 public class StoreEntity {

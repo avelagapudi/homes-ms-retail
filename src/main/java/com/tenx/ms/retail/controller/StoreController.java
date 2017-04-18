@@ -13,9 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import com.tenx.ms.retail.dto.StoreDTO;
 import java.util.List;
 
-/**
- * Created by anupamav on 3/21/17.
- */
+
 @RestController
 @RequestMapping("/v1/stores")
 @Api(value="/stores", description="operations to manage stores")

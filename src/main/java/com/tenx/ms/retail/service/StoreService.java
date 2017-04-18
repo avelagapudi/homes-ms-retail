@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.tenx.ms.commons.rest.dto.ResourceCreated;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @Service
 public class StoreService {
     @Autowired

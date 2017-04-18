@@ -12,9 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import com.tenx.ms.retail.dto.ProductDTO;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @RestController
 @RequestMapping("/v1/stock")
 @Api(value="/stock", description = "Manage stock for products in a store")
@@ -44,4 +41,5 @@ public class StockController {
 
         return new ResponseEntity<StockDTO>(updatedStock, HttpStatus.CREATED);
     }
+
 }

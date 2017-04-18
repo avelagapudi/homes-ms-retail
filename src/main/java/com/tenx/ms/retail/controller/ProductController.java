@@ -16,9 +16,6 @@ import com.tenx.ms.retail.service.StoreService;
 import com.tenx.ms.retail.dto.StoreDTO;
 import java.util.List;
 
-/**
- * Created by anupamav on 3/21/17.
- */
 @RestController
 @RequestMapping("/v1/products")
 @Api(value="/products", description="operations to manage products")

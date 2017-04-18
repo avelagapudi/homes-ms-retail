@@ -2,10 +2,6 @@ package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-/**
- * Created by anupamav on 4/4/17.
- */
 public class StockDTO {
 
     @JsonProperty(value="stock_id")
