@@ -1,12 +1,14 @@
 package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class StoreDTO {
     @JsonProperty("store_id")
     private Long storeId;
 
     @JsonProperty("store_name")
+    @NotEmpty
     private String storeName;
 
     public StoreDTO() {

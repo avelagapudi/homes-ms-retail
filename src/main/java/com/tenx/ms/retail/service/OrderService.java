@@ -96,6 +96,7 @@ public class OrderService {
         dto.setLastName(orderEntity.getLastName());
         dto.setEmail(orderEntity.getEmail());
         dto.setPhone(orderEntity.getPhone());
+        dto.setStatus(orderEntity.getStatus());
 
         return dto;
     }

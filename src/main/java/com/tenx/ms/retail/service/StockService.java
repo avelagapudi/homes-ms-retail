@@ -1,6 +1,5 @@
 package com.tenx.ms.retail.service;
 
-import com.tenx.ms.commons.rest.dto.ResourceCreated;
 import com.tenx.ms.retail.entity.StockEntity;
 import com.tenx.ms.retail.repository.StockRepository;
 import org.springframework.stereotype.Service;
@@ -35,8 +34,7 @@ public class StockService {
 
         stockEntity = stockRepository.save(stockEntity);
 
-        //return new ResourceCreated<>(stockEntity.getStockId());
-        return convertToDTO(stockEntity);
+         return convertToDTO(stockEntity);
 
     }
 
@@ -46,6 +44,7 @@ public class StockService {
         dto.setStockId(stockEntity.getStockId());
         dto.setStoreId(stockEntity.getStoreId());
         dto.setProductId(stockEntity.getProductId());
+        dto.setCount(stockEntity.getCount());
 
         return dto;
     }
@@ -53,12 +52,16 @@ public class StockService {
     public boolean isStockAvailable(StockDTO stock) {
         StockEntity result = stockRepository.findByStoreIdAndProductId(stock.getStoreId(), stock.getProductId());
 
-        Integer stockCount = result.getCount();
-
-        if(stockCount >= stock.getCount()) {
-            return true;
-        } else {
+        if (result == null) {
             return false;
+        } else {
+            Integer stockCount = result.getCount();
+
+            if (stockCount >= stock.getCount()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

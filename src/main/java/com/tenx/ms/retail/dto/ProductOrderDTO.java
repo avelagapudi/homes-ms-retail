@@ -10,6 +10,15 @@ public class ProductOrderDTO {
     @JsonProperty(value="count")
     private Integer count;
 
+    public ProductOrderDTO(){
+
+    }
+
+    public ProductOrderDTO(Long productId, Integer count){
+        this.productId = productId;
+        this.count = count;
+    }
+
     public Long getProductId() {
         return productId;
     }

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -16,15 +17,31 @@ public class ProductEntity {
     @Column(name = "product_id")
     private Long productId;
 
+    @NotNull
     @Column(name = "store_id")
     private Long storeId;
 
+    @NotNull
     private String name;
     private String description;
+
+    @NotNull
     private String sku;
 
     @Column(name = "price", columnDefinition = "DECIMAL(10,2)")
+    @NotNull
     private Double price;
+
+    public ProductEntity(){}
+
+    public ProductEntity(Long productId, Long storeId, String name, String description, String sku, Double price){
+        this.productId = productId;
+        this.storeId = storeId;
+        this.name = name;
+        this.description = description;
+        this.sku = sku;
+        this.price = price;
+    }
 
 
     public Long getProductId() {

@@ -1,6 +1,9 @@
 package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 public class StockDTO {
 
@@ -13,21 +16,11 @@ public class StockDTO {
     @JsonProperty(value="product_id")
     private Long productId;
 
+    @NotNull
     @JsonProperty(value="count")
     private Integer count;
 
     public StockDTO(){}
-
-    public StockDTO(Integer count) {
-        this.count = count;
-    }
-
-    public StockDTO (Long stockId, Long storeId, Long productId, Integer count) {
-        this.stockId = stockId;
-        this.storeId = storeId;
-        this.productId = productId;
-        this.count = count;
-    }
 
     public StockDTO (Long storeId, Long productId, Integer count) {
         this.storeId = storeId;

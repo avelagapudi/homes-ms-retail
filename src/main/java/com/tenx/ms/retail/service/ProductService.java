@@ -1,6 +1,5 @@
 package com.tenx.ms.retail.service;
 
-import com.tenx.ms.commons.rest.dto.ResourceCreated;
 import org.springframework.stereotype.Service;
 import com.tenx.ms.retail.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,6 @@ public class ProductService {
 
         productEntity = productRepository.save(productEntity);
 
-        //return new ResourceCreated<>(productEntity.getProductId());
         return convertToDTO(productEntity);
 
     }

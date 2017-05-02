@@ -1,6 +1,7 @@
 package com.tenx.ms.retail.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "stores")
@@ -12,6 +13,7 @@ public class StoreEntity {
     private Long storeId;
 
     @Column(name = "store_name")
+    @NotNull
     private String storeName;
 
     public StoreEntity() {

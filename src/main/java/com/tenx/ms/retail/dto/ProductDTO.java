@@ -1,6 +1,7 @@
 package com.tenx.ms.retail.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class ProductDTO {
 
@@ -10,9 +11,13 @@ public class ProductDTO {
     @JsonProperty(value="store_id")
     private Long storeId;
 
+    @NotEmpty
     private String name;
     private String description;
+
+    @NotEmpty
     private String sku;
+
     private Double price;
 
     public ProductDTO(){}

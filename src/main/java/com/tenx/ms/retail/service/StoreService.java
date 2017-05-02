@@ -7,7 +7,7 @@ import com.tenx.ms.retail.entity.StoreEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.tenx.ms.commons.rest.dto.ResourceCreated;
+
 
 @Service
 public class StoreService {
@@ -21,7 +21,7 @@ public class StoreService {
         storeEntity.setStoreName(store.getStoreName());
 
         storeEntity = storeRepository.save(storeEntity);
-        //return new ResourceCreated<>(storeEntity.getStoreId());
+
         return convertToDTO(storeEntity);
 
     }

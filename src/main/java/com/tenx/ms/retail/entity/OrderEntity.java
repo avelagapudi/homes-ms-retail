@@ -1,8 +1,12 @@
 package com.tenx.ms.retail.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
+import com.tenx.ms.commons.validation.constraints.PhoneNumber;
+import com.tenx.ms.commons.validation.constraints.Email;
+
 
 @Entity
 @Table(name = "orders")
@@ -19,16 +23,25 @@ public class OrderEntity {
     @Column(name="order_date")
     private Date orderDate;
 
+    @NotNull
     @Column(name="first_name")
     private String firstName;
 
+    @NotNull
     @Column(name="last_name")
     private String lastName;
 
+    @NotNull
+    @Email
     private String email;
+
+    @PhoneNumber
     private String phone;
+
+    @NotNull
     private Integer status;
 
+    @NotNull
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<ProductOrderEntity> products;
 

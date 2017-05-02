@@ -3,8 +3,12 @@ package com.tenx.ms.retail.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import java.util.Set;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 public class OrderDTO {
+    private Long orderId;
 
     @JsonProperty(value="store_id")
     private Long storeId;
@@ -12,18 +16,44 @@ public class OrderDTO {
     @JsonProperty(value="order_date")
     private Date orderDate;
 
+    @NotEmpty
     @JsonProperty(value="products")
     private Set<ProductOrderDTO> products;
 
+    @NotEmpty
     @JsonProperty(value="first_name")
     private String firstName;
 
+    @NotEmpty
     @JsonProperty(value="last_name")
     private String lastName;
 
+    @NotEmpty
     private String email;
     private String phone;
+
+    @NotNull
     private Integer status;
+
+    public OrderDTO(){}
+
+    public OrderDTO(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public OrderDTO(Long storeId, String firstName, String lastName){
+        this.storeId = storeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
 
     public Long getStoreId() {
         return storeId;

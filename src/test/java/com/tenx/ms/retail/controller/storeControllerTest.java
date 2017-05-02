@@ -48,7 +48,7 @@ public class storeControllerTest {
         mockMvc.perform(post("/v1/stores")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(mapper.writeValueAsString(store)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class storeControllerTest {
     }
 
     @Test
-    public void getStoreName() throws Exception{
+    public void getStoreByName() throws Exception{
         StoreDTO store = new StoreDTO(2L,"testStore");
 
         when(storeService.getStoreByName("testStore")).thenReturn(store);

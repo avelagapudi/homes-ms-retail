@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "stock")
@@ -21,6 +22,7 @@ public class StockEntity {
     @Column(name = "store_id")
     private Long storeId;
 
+    @NotNull
     private Integer count;
 
     public Long getStockId() {

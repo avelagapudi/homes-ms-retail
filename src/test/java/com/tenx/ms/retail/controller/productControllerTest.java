@@ -62,7 +62,7 @@ public class productControllerTest {
     }
 
     @Test
-    public void addProduct_conflict() throws Exception{
+    public void addProduct_Conflict() throws Exception{
 
     }
 
@@ -112,6 +112,8 @@ public class productControllerTest {
                 .andExpect(jsonPath("sku").value("3KY45"))
                 .andExpect(jsonPath("price").value(1234.56));
     }
+
+
 
     @Test
     public void getProductsByStore_NotFound() throws Exception{
