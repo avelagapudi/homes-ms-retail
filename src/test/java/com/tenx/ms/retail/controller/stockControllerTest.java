@@ -55,8 +55,4 @@ public class stockControllerTest {
 
     }
 
-    @Test
-    public void updateStock_notFound() throws Exception{}
-
-
 }

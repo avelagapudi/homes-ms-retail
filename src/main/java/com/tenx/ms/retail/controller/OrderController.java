@@ -34,6 +34,7 @@ public class OrderController {
     @RequestMapping(value = "/{storeId:\\d+}", method = RequestMethod.POST)
     public ResponseEntity<?> createOrder(@PathVariable("storeId") Long storeId, @Validated @RequestBody OrderDTO order){
         order.setStoreId(storeId);
+        order.setStatus("ORDERED");
 
         logger.debug("Create and order", order);
         OrderDTO createdOrder = orderService.createOrder(order);

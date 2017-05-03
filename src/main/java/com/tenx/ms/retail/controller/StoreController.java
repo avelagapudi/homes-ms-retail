@@ -95,7 +95,7 @@ public class StoreController {
             @ApiResponse(code=404, message="Not Found"),
             @ApiResponse(code=500, message="Internal Server Error")
     })
-    @RequestMapping(value = "/{name:[a-zA-Z]+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{name:[a-zA-Z-_ ]+$}", method = RequestMethod.GET)
     public ResponseEntity<StoreDTO> getStoreByName(@PathVariable("name") String name) {
         logger.debug("Get store by name");
         StoreDTO store = storeService.getStoreByName(name);

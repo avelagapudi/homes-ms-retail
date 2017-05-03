@@ -53,3 +53,15 @@ CREATE TABLE product_order(
 	updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(product_order_id)
 );
+
+INSERT INTO stores (store_id, store_name) VALUES
+(1, "test store one"),
+(2,"test store two");
+
+INSERT INTO products(product_id, store_id, name, description, sku, price) VALUES
+(1, 1, "test product one","description of product one","LK1234",2500.00),
+(2,2,"test product two", "description of product two","MH4536",1500.00);
+
+INSERT INTO stock(stock_id,product_id,store_id,count) VALUES
+(1,1,1,20),
+(2,2,2,15);

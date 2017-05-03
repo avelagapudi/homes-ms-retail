@@ -48,6 +48,10 @@ public class ProductService {
     }
 
     public ProductDTO convertToDTO(ProductEntity productEntity) {
+        if(productEntity == null) {
+            return null;
+        }
+
         ProductDTO dto = new ProductDTO();
 
         dto.setProductId(productEntity.getProductId());

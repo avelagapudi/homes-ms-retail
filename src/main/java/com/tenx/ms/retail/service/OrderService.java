@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.tenx.ms.retail.repository.OrderRepository;
 import com.tenx.ms.retail.dto.OrderDTO;
 import com.tenx.ms.retail.entity.OrderEntity;
+import com.tenx.ms.retail.entity.OrderEntity.OrderStatus;
 import com.tenx.ms.retail.dto.ProductOrderDTO;
 import com.tenx.ms.retail.dto.StockDTO;
 import com.tenx.ms.retail.service.StockService;
@@ -35,7 +36,7 @@ public class OrderService {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setStoreId(order.getStoreId());
         orderEntity.setOrderDate(order.getOrderDate());
-        orderEntity.setStatus(order.getStatus());
+        orderEntity.setStatus(OrderStatus.ORDERED);
         orderEntity.setProducts(
                 order.getProducts().stream()
                         .map(product->convertToProductOrderEntity(orderEntity, product))
@@ -96,7 +97,7 @@ public class OrderService {
         dto.setLastName(orderEntity.getLastName());
         dto.setEmail(orderEntity.getEmail());
         dto.setPhone(orderEntity.getPhone());
-        dto.setStatus(orderEntity.getStatus());
+        dto.setStatus(orderEntity.getStatus().name());
 
         return dto;
     }

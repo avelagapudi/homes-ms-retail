@@ -55,7 +55,7 @@ public class orderServiceTest {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setStoreId(1L);
         orderEntity.setOrderDate(new Date());
-        orderEntity.setStatus(1);
+        orderEntity.setStatus(OrderEntity.OrderStatus.ORDERED);
         orderEntity.setProducts(productOrders);
         orderEntity.setFirstName("testFirstName");
         orderEntity.setLastName("testLastName");
@@ -76,7 +76,7 @@ public class orderServiceTest {
         order.setLastName("testLastName");
         order.setEmail("test@ten-x.com");
         order.setPhone("2134567890");
-        order.setStatus(1);
+        order.setStatus("ORDERED");
         order.setOrderDate(new Date());
 
         StockDTO stock = new StockDTO();
@@ -114,7 +114,7 @@ public class orderServiceTest {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setStoreId(1L);
         orderEntity.setOrderDate(new Date());
-        orderEntity.setStatus(1);
+        orderEntity.setStatus(OrderEntity.OrderStatus.ORDERED);
         orderEntity.setProducts(productOrders);
         orderEntity.setFirstName("testFirstName");
         orderEntity.setLastName("testLastName");
@@ -135,7 +135,7 @@ public class orderServiceTest {
         order.setLastName("testLastName");
         order.setEmail("test@ten-x.com");
         order.setPhone("2134567890");
-        order.setStatus(1);
+        order.setStatus("ORDERED");
         order.setOrderDate(new Date());
 
         StockDTO stock = new StockDTO();

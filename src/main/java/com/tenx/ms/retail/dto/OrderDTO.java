@@ -33,7 +33,7 @@ public class OrderDTO {
     private String phone;
 
     @NotNull
-    private Integer status;
+    private String status;
 
     public OrderDTO(){}
 
@@ -111,11 +111,11 @@ public class OrderDTO {
         this.phone = phone;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

@@ -12,6 +12,10 @@ import com.tenx.ms.commons.validation.constraints.Email;
 @Table(name = "orders")
 public class OrderEntity {
 
+    public enum OrderStatus {
+        ORDERED, PACKING, SHIPPED
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="order_id")
@@ -39,7 +43,7 @@ public class OrderEntity {
     private String phone;
 
     @NotNull
-    private Integer status;
+    private OrderStatus status;
 
     @NotNull
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -101,11 +105,11 @@ public class OrderEntity {
         this.storeId = storeId;
     }
 
-    public Integer getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

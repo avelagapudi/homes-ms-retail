@@ -47,13 +47,20 @@ public class ProductController {
             return new ResponseEntity<String>("Store does not exist", HttpStatus.NOT_FOUND);
         }
 
-        //Add storeId to product DTO
-        product.setStoreId(storeId);
+        ProductDTO existingProduct = productService.getProductByStoreIdProductName(storeId, product.getName());
 
-        //Add product under store
-        logger.debug("Add Product", product);
-        ProductDTO addedProduct = productService.addProduct(product);
-        return new ResponseEntity<ProductDTO>(addedProduct, HttpStatus.CREATED);
+        if(existingProduct == null) {
+            //Add storeId to product DTO
+            product.setStoreId(storeId);
+
+            //Add product under store
+            logger.debug("Add Product", product);
+            ProductDTO addedProduct = productService.addProduct(product);
+            return new ResponseEntity<ProductDTO>(addedProduct, HttpStatus.CREATED);
+        } else {
+            logger.debug("Product already exists for the store");
+            return new ResponseEntity<String>("Product already exits for the store",HttpStatus.CONFLICT);
+        }
     }
 
 
@@ -68,7 +75,7 @@ public class ProductController {
         List<ProductDTO> products = productService.getProductsByStore(storeId);
 
         if(products == null || products.isEmpty()) {
-            logger.debug("products does not xist for the store");
+            logger.debug("products does not exist for the store");
             return new ResponseEntity<List<ProductDTO>>(HttpStatus.NO_CONTENT);
         }
 
@@ -102,7 +109,7 @@ public class ProductController {
             @ApiResponse(code=404, message="Not Found"),
             @ApiResponse(code=500, message="Internal Server Error")
     })
-    @RequestMapping(value = "/{storeId:\\d+}/{productName:[a-zA-Z]+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{storeId:\\d+}/{productName:[a-zA-Z-_ ]+$}", method = RequestMethod.GET)
     public ResponseEntity<ProductDTO> getProductByStoreIdProductName(@PathVariable("storeId") Long storeId, @PathVariable("productName") String productName){
         logger.debug("Get product by storeId and product name");
         ProductDTO product = productService.getProductByStoreIdProductName(storeId, productName);

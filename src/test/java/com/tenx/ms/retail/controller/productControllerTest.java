@@ -63,8 +63,21 @@ public class productControllerTest {
 
     @Test
     public void addProduct_Conflict() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+
+        StoreDTO store = new StoreDTO(2L, "test2Store");
+        ProductDTO product = new ProductDTO(2L,"testProduct","description about test product","3KY45",1234.56);
+
+        when(storeService.getStoreById(2L)).thenReturn(store);
+        when(productService.getProductByStoreIdProductName(2L, "testProduct")).thenReturn(product);
+
+        mockMvc.perform(post("/v1/products/{id}", 2L)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(mapper.writeValueAsString(product)))
+                .andExpect(status().isConflict());
 
     }
+
 
     @Test
     public void getProductsByStore() throws Exception{
@@ -77,6 +90,17 @@ public class productControllerTest {
         mockMvc.perform(get("/v1/products/{id}", 3L))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"));
+
+    }
+
+    @Test
+    public void getProductsByStore_NoContent() throws Exception{
+        List<ProductDTO> products = Arrays.asList();
+
+        when(productService.getProductsByStore(3L)).thenReturn(products);
+
+        mockMvc.perform(get("/v1/products/{id}", 3L))
+                .andExpect(status().isNoContent());
 
     }
 

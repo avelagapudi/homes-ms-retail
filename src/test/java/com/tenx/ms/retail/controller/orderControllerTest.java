@@ -58,7 +58,7 @@ public class orderControllerTest {
         order.setLastName("testLastName");
         order.setEmail("test@ten-x.com");
         order.setPhone("2134567890");
-        order.setStatus(1);
+        order.setStatus("ORDERED");
         order.setOrderDate(new Date());
 
         when(orderService.createOrder(order)).thenReturn(order);
